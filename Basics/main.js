@@ -57,4 +57,35 @@ for (let i = 0; i < user1.length; i++) {
 function sum(a, b) {
   return a + b;
 }
+
 console.log(sum(1, 2));
+
+//callback
+function sumation(n1, n2, fnToCall) {
+  let result = n1 + n2;
+  fnToCall(result);
+}
+
+function displayResult(data) {
+  console.log("Result of the sum is: " + data);
+}
+
+function displayResultPassive(data) {
+  console.log("Sum's Result is : " + data);
+}
+
+const ans = sumation(1, 2, displayResult);
+console.log(ans);
+
+//A function is callback some times inside a function
+
+function calculateArithmetic(a, b, arithmaticFinalFunction) {
+  const ans = arithmaticFinalFunction(a, b);
+  return ans;
+}
+
+function sum(a, b) {
+  return a + b;
+}
+
+console.log(calculateArithmetic(1, 2, sum));
