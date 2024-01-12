@@ -16,7 +16,7 @@
     </p>
     <button onclick="myfunction()">Try It</button>
     <p id="displayResult"></p>
-    <!-- <script>
+    <script>
       function myfunction() {
         var x = document.getElementById("LoginForm").elements.length;
         console.log(x);
@@ -28,7 +28,7 @@
         pars.innerText = "This  is paragram created via DOM";
         document.body.appendChild(pars);
       }
-    </script> -->
+    </script>
     <script>
       function myfunction() {
         const x = document.forms["LoginForm"];
@@ -36,7 +36,6 @@
         for (let i = 0; i < x.length; i++) {
           text += x.elements[i].value + "<br>";
         }
-        document.getAnimations;
       }
     </script>
   </body>
