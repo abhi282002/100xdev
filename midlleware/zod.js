@@ -1,3 +1,4 @@
+const { secureHeapUsed } = require("crypto");
 const express = require("express");
 const z = require("zod");
 const app = express();
@@ -16,7 +17,26 @@ const authSchema = z.object({
   kidneys: z.array(z.number()),
 });
 
+function validate(obj) {
+  const schema = z.object({
+    email: z.string().email(),
+    password: z.string().min(8),
+  });
+  const response = schema.safeParse(obj);
+  return response;
+}
 app.use(express.json());
+
+app.post("/login", function (req, res) {
+  const response = validate(req.body);
+  if (!response.success) {
+    res.json({
+      msg: "Your inputs are invalid",
+    });
+    return;
+  }
+});
+
 app.post("/health-checkup", function (req, res) {
   const kidneys = req.body.kidneys;
   const response = schema.safeParse(kidneys);

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>nodeList</title>
+  </head>
+  <body>
+    <!-- this is comment -->
+    <h3>The element object</h3>
+    <h2>the childnodes property</h2>
+    <p>White space between element are text Node. Comment are also Nodes</p>
+    <p>The Body element's child node are</p>
+    <p id="demo"></p>
+    Enter Your Name:<input type="text" id="fname" oninput="upperCase()" />
+    <script>
+      function upperCase() {
+        const x = document.getElementById("fname");
+        x.value = x.value.toUpperCase();
+      }
+      const nodeList = document.body.childNodes;
+      let text = "";
+      for (let i = 0; i < nodeList.length; i++) {
+        text += nodeList[i].nodeName + "<br>";
+
+        document.getElementById("demo").innerHTML = text;
+      }
+    </script>
+  </body>
+</html>

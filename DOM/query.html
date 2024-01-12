@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>Div One</div>
+    <p class="intro">paragraph One</p>
+    <div>Div Two</div>
+    <p class="subHeading">Paragraph Two</p>
+    <div>Yet another div</div>
+    <div id="myDiv" style="border: 1px solid black; padding: 8px">
+      <h2 class="example">A heaindg</h2>
+      <p class="example">A paragraph</p>
+      <p class="example">A paragraph</p>
+    </div>
+    <script>
+      var paragraphs = document.querySelectorAll("p.intro");
+      paragraphs.forEach(
+        (paragraph) => (paragraph.style.backgroundColor = "red")
+      );
+    </script>
+  </body>
+</html>
