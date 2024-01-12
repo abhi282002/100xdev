@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Delegation</title>
+  </head>
+  <body>
+    <div>
+      <ul id="categories">
+        <li id="laptop">laptop</li>
+        <li id="mobaile">Mobaile</li>
+        <li id="shoes">shoes</li>
+      </ul>
+    </div>
+    <form id="form">
+      <input type="text" data-uppercase />
+      <input type="text" data-uppercase />
+      <input type="text" data-uppercase />
+    </form>
+    <script>
+      document.querySelector("#form").addEventListener("keyup", (e) => {
+        console.log(e);
+        if (e.target.dataset.uppercase != undefined) {
+          e.target.value = e.target.value.toUpperCase();
+        }
+      });
+      document.querySelector("#categories").addEventListener("click", (e) => {
+        if (e.target.tagName == "LI") {
+          window.location.href = "/" + e.target.id;
+        }
+      });
+    </script>
+  </body>
+</html>
