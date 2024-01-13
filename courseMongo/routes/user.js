@@ -32,11 +32,33 @@ router.get("/courses", (req, res) => {
     });
 });
 router.post("/courses/:courseId", userMiddleware, (req, res) => {
-  //implement
+  //implement course push logic
+  const courseId = req.params.courseId;
+  const username = req.headers.username;
+  User.updateOne(
+    { username: username },
+    {
+      $push: {
+        purchasesCourses: courseId,
+      },
+    }
+  ).catch((e) => {
+    console.log(e);
+  });
+  res.json({ msg: "Course Purchase Successfully" });
 });
 
-router.get("/purchasedCourses", userMiddleware, (req, res) => {
+router.get("/purchasedCourses", userMiddleware, async (req, res) => {
   //implement
+  const user = await User.findOne({
+    username: req.headers.username,
+  });
+  const courses = await Course.find({
+    _id: {
+      $in: user.purchasesCourses,
+    },
+  });
+  res.status(200).json({ courses: courses });
 });
 
 module.exports = router;
