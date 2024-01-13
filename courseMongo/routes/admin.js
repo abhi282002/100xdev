@@ -35,6 +35,14 @@ router.post("/courses", adminMiddleware, async (req, res) => {
   res.json({ msg: "Course Created Successfully", courseId: newCourse._id });
 });
 
-router.get("/courses", adminMiddleware, (req, res) => {});
+router.get("/courses", adminMiddleware, (req, res) => {
+  Course.find({})
+    .then((value) => {
+      res.json({ AllCourses: value });
+    })
+    .catch((value) => {
+      res.status(500).json({ msg: "Internal Server error" });
+    });
+});
 
 module.exports = router;
