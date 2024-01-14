@@ -1,6 +1,9 @@
 const { Router } = require("express");
 const userMiddleware = require("../middleware/user");
 const { User, Course } = require("../db");
+const jwt = require("jsonwebtoken");
+const jwtSecret = require("../constant");
+
 const router = Router();
 
 //user routes
@@ -14,7 +17,8 @@ router.post("/signup", (req, res) => {
     password: password,
   })
     .then((value) => {
-      res.json({ msg: "User created successfully" });
+      const token = jwt.sign({ username }, jwtSecret);
+      res.json({ msg: "User created successfully", token: token });
     })
     .catch(() => {
       res.status(500).json({ msg: "Server error" });
@@ -34,7 +38,8 @@ router.get("/courses", (req, res) => {
 router.post("/courses/:courseId", userMiddleware, (req, res) => {
   //implement course push logic
   const courseId = req.params.courseId;
-  const username = req.headers.username;
+  const username = req.username;
+  console.log(username);
   User.updateOne(
     { username: username },
     {
@@ -51,7 +56,7 @@ router.post("/courses/:courseId", userMiddleware, (req, res) => {
 router.get("/purchasedCourses", userMiddleware, async (req, res) => {
   //implement
   const user = await User.findOne({
-    username: req.headers.username,
+    username: req.username,
   });
   const courses = await Course.find({
     _id: {
