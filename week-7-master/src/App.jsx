@@ -34,6 +34,7 @@ function CountRenderer() {
   return (
     <div>
       <b>{count}</b>
+      <EvenCountRenderer />
     </div>
   );
 }
